@@ -11,5 +11,5 @@ export const loadCards = (cards) => {
 };
 
 export const addNewCard =  (newCard) => {
-  //add function to add new card
+  //add function to add new card to db
 }

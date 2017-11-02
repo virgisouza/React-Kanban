@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-//import logo from './logo.svg';
 //import './index.css';
 
 class App extends Component {
-  constructor(){
-    super();
+  // constructor(){
+  //   super();
 
-    //state initialized here
-  }
+  //   //state initialized here
+  // }
 
 
   componentWillMount(){
