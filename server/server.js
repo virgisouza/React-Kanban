@@ -9,6 +9,6 @@ const PORT = process.env.PORT || 4567;
 // })
 
 app.listen(PORT, function () {
-  db.sequelize.sync({force: true});
+  db.sequelize.sync({force: false});
   console.log('Swerver up listening on port ' + PORT)
 });
