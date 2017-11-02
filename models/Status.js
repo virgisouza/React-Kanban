@@ -7,7 +7,7 @@ module.exports = function (sequelize, DataTypes){
   status.associate = function (models) {
     status.hasMany(models.cards, {
       foreignKey: {
-        name: 'status_',
+        name: 'status_id',
         allowNull: true
       }
     })

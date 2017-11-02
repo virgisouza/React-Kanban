@@ -7,7 +7,7 @@ module.exports = function (sequelize, DataTypes){
   priority.associate = function (models) {
     priority.hasMany(models.cards, {
       foreignKey: {
-        name: 'priorities_',
+        name: 'priorities_id',
         allowNull: false
       }
     });
