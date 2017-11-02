@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 //import './index.css';
+import { loadCards } from '../actions/cards';
+import NewCardForm from '../containers/NewCardForm/index';
+import CardList from '../containers/CardList';
 
 class App extends Component {
-  // constructor(){
-  //   super();
+  constructor(){
+   super();
 
   //   //state initialized here
-  // }
+  }
 
 
   componentWillMount(){
@@ -15,13 +18,14 @@ class App extends Component {
   }
 
   componentDidMount(){
-
+    this.props.loadCards();
   }
 
   render() {
     return (
       <div className="App">
-        Hello World
+        <NewCardForm quote='add a task'/>
+        <CardList cards={this.props.cards}/>
       </div>
     );
   }
@@ -30,7 +34,7 @@ class App extends Component {
 const mapStateToProps = (state) => {
 
   return{
-    cards: state.cardList;
+    cards: state.cardList
   }
 }
 

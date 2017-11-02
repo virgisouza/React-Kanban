@@ -1,6 +1,6 @@
 import React , { Component } from 'react';
 import { connect } from 'react-redux';
-import { addCard } from '../actions/cards';
+import { addCard } from '../../actions/cards';
 
 class NewCardForm extends Component {
   constructor(props) {
