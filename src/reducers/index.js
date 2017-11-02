@@ -1,11 +1,6 @@
-import {LOAD_CARDS} from '../actions/cards';
+import { combineReducers } from 'redux';
+import cardList from './cardList.js';
 
-const reducers = (state = initialState, action) => {
-  switch(action.type){
-    case :
-
-    default:
-  }
-}
-
-export default reducers;
+export default combineReducers({
+  cardList
+});

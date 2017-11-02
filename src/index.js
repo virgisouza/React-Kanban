@@ -8,7 +8,7 @@ import registerServiceWorker from './registerServiceWorker';
 import thunk from 'redux-thunk';
 
 const store = createStore(
-  //reducers,
+  reducers,
   applyMiddleware(thunk)
 );
 

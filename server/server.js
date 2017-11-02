@@ -16,7 +16,6 @@ app.get('/', function (req, res) {
 
 app.post('/api/cards', function (req, res) {
   const data = req.body;
-  console.log(data);
 
   return cards.create({
     title: data.title,
@@ -41,7 +40,6 @@ app.post('/api/users', (req,res) => {
 
 app.get('/api/cards', function (req, res) {
   const data = req.body;
-  console.log(data);
   res.json(data);
 })
 

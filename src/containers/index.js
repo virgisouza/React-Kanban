@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-//import onclick function from action
+import { addCard } from '../actions/cards';
 
 class NewCardForm extends Component {
   constructor(props) {
@@ -53,7 +53,9 @@ class NewCardForm extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    //return function set on object key
+    addCard: (card) => {
+      dispatch(addCard(card))
+    }
   }
 }
 
