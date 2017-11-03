@@ -1,32 +1,52 @@
 import React , { Component } from 'react';
 import { connect } from 'react-redux';
-import { addCard } from '../../actions/cards';
+import { addCard, loadPriorities } from '../../actions/cards';
 
 class NewCardForm extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      titleInput: ''
+      titleInput: '',
+      assignedToInput: '',
+      priorityInput: '',
+      statusInput: '',
+      createdByInput: ''
     }
 
-    this.handleChangeTitle = this.handleChangeTitle.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   handleSubmit(event){
     event.preventDefault();
 
     this.setState({
-      titleInput: ''
+      titleInput: '',
+      assignedToInput: '',
+      priorityInput: '',
+      statusInput: '',
+      createdByInput: ''
     })
   }
 
 
-  handleChangeTitle(event){
+  handleChange(event){
     event.preventDefault();
     this.setState({
-      titleInput: event.target.value
+      titleInput: event.target.value,
+      assignedToInput: event.target.value,
+      priorityInput: event.target.value,
+      statusInput: event.target.value,
+      createdByInput: event.target.value
     });
+  }
+
+  handlePriority(event){
+    event.preventDefault();
+    loadPriorities();
+    this.setState({
+      priorityInput: this.props.priorities.type
+    })
   }
 
   render(){
@@ -34,15 +54,19 @@ class NewCardForm extends Component {
     return (
       <div className='NewCardForm'>
         <form onSubmit={this.handleSubmit.bind(this)}>
-          <input type='text' placeholder='New Task' value={this.state.titleInput} onChange={this.handleChangeTitle.bind(this)}/>
-          <select name="priority">
-            <option value="Low">Low</option>
-            <option value="Medium">Medium</option>
-            <option value="High">High</option>
-            <option value="Blocker">Blocker</option>
-          </select>
+          <input type='text' placeholder='New Task' value={this.state.titleInput} onChange={this.handleChange.bind(this)}/>
           <select name="assignedTo">
-            <option value="virgi">User One</option>
+            <option value="1">Virgi</option>
+          </select>
+          <select name="priority">
+            <option value={this.props.priority_id}>{this.handlePriority.bind(this)}</option>
+
+          </select>
+          <select>
+            <option value="1">Queue</option>
+          </select>
+          <select name="createdBy">
+            <option value="1">Virgi</option>
           </select>
           <button type='submit'>Submit</button>
         </form>
@@ -54,7 +78,12 @@ class NewCardForm extends Component {
 const mapDispatchToProps = (dispatch) => {
   return {
     addCard: (newCard) => {
+      console.log('NewCardForm', newCard);
       dispatch(addCard(newCard))
+    },
+    loadPriorities: (priorities) => {
+      console.log('NewCardForm priorities',   priorities);
+      dispatch(loadPriorities(priorities));
     }
   }
 }
@@ -66,5 +95,4 @@ const ConnectNewCardForm = connect(
 
 
 export default ConnectNewCardForm;
-
 

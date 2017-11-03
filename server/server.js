@@ -18,6 +18,7 @@ app.use(bodyParser.urlencoded({ "extended" : true }));
 
 const cards = db.cards;
 const users = db.users;
+const priorities = db.priorities;
 
 
 app.get('/', function (req, res) {
@@ -26,6 +27,7 @@ app.get('/', function (req, res) {
 
 app.post('/api/cards', function (req, res) {
   const data = req.body;
+  console.log('post data 1', data);
 
   return cards.create({
     title: data.title,
@@ -34,6 +36,7 @@ app.post('/api/cards', function (req, res) {
     status_id: data.status_id,
     created_by: data.created_by
   }).then(data => {
+    console.log('post server data', data);
     return res.json(data);
   })
 
@@ -58,6 +61,13 @@ app.get('/api/users', function (req, res) {
   return users.findAll()
     .then(users => {
       res.json(users);
+    })
+})
+
+app.get('/api/priorities', function (req, res) {
+  return priorities.findAll()
+    .then(priorities => {
+      res.json(priorities);
     })
 })
 

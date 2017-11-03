@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 //import './index.css';
-import { loadCards, addCard } from '../actions/cards';
+import { loadCards, addCard, loadPriorities } from '../actions/cards';
 import NewCardForm from '../containers/NewCardForm/index';
 import CardList from '../containers/CardList';
 import Columns from '../components/Columns';
@@ -22,6 +22,7 @@ class App extends Component {
   componentDidMount(){
     this.props.loadCards();
     this.props.addCard();
+    // this.props.loadPriorities();
   }
 
   render() {
@@ -36,21 +37,24 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => {
-  //console.log('mapStateToProps',state);
+  console.log('mapStateToProps',state);
   return {
     cards: state.cardList,
-    card: state.cardList
+    card: state.cardList,
+    priorities: state.prioritiesList
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
-
   return {
     loadCards: () => {
       dispatch(loadCards())
     },
     addCard: () => {
       dispatch(addCard())
+    },
+    loadPriorities: () => {
+      dispatch(loadPriorities())
     }
   }
 }

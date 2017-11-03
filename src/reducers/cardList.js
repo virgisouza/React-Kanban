@@ -1,4 +1,4 @@
-import {LOAD_CARDS, ADD_CARD} from '../actions/cards';
+import {LOAD_CARDS, ADD_CARD, LOAD_PRIORITIES} from '../actions/cards';
 
 const initialState = [];
 
@@ -8,6 +8,8 @@ const cardList = (state = initialState, action) => {
       return [...action.cards];
     case ADD_CARD :
       return [...state, action.newCard];
+    case LOAD_PRIORITIES:
+      return [...action.priorities];
     default:
       return state;
   }
