@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-//import './index.css';
 import { loadPriorities } from '../actions/priorities';
 import { loadCards, addCard } from '../actions/cards';
 import NewCardForm from '../containers/NewCardForm/index';

@@ -1,17 +1,12 @@
 module.exports = function (sequelize, DataTypes){
 
-  const priority = sequelize.define('priorities', {
-    type: {type: DataTypes.STRING, allowNull: false} //low, medium, high, blocker
-  });
+  const Priority = sequelize.define('Priorities', {
+    type: {type: DataTypes.STRING, allowNull: false}},
+    {tableName: 'priorities'});
 
-  priority.associate = function (models) {
-    priority.hasMany(models.cards, {
-      foreignKey: {
-        name: 'priorities_id',
-        allowNull: false
-      }
-    });
-  }
+  Priority.associate = function (models) {
+    Priority.hasMany(models.Card, {foreignKey:'priorities_id', allowNull: false});
+  };
 
-  return priority;
+  return Priority;
 }

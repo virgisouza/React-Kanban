@@ -16,9 +16,31 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ "extended" : true }));
 
 
-const cards = db.cards;
-const users = db.users;
-const priorities = db.priorities;
+const Card = db.Card;
+const User = db.User;
+const Priorities = db.priorities;
+
+
+app.get('/api/cards', (req, res) => {
+  return Card.findAll({
+    include: [
+      {model: User, as: 'Creator'},
+      {model: User, as: 'Dev'}
+    ]
+  }).then(cards => {
+      return res.json(cards);
+  })
+})
+app.get('/api/users', (req, res) => {
+  return User.findAll({
+    include: [
+      {model: Card, as: 'Cards'},
+      {model: Card, as: 'Tasks'}
+    ]
+  }).then(users => {
+      return res.json(users);
+  })
+})
 
 
 app.get('/', function (req, res) {
@@ -44,28 +66,28 @@ app.post('/api/cards', function (req, res) {
 
 app.post('/api/users', (req,res) => {
   const data = req.body;
-  return users.create({username: data.username})
+  return User.create({username: data.username})
     .then(data => {
       res.json(data);
     })
 })
 
-app.get('/api/cards', function (req, res) {
-  return cards.findAll()
-  .then(cards => {
-    res.json(cards);
-  })
-})
+// app.get('/api/cards', function (req, res) {
+//   return cards.findAll()
+//   .then(cards => {
+//     res.json(cards);
+//   })
+// })
 
-app.get('/api/users', function (req, res) {
-  return users.findAll()
-    .then(users => {
-      res.json(users);
-    })
-})
+// app.get('/api/users', function (req, res) {
+//   return users.findAll()
+//     .then(users => {
+//       res.json(users);
+//     })
+// })
 
 app.get('/api/priorities', function (req, res) {
-  return priorities.findAll()
+  return Priorities.findAll()
     .then(priorities => {
       res.json(priorities);
     })
