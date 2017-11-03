@@ -1,14 +1,24 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const db = require('../models');
-const app = express()
 const PORT = process.env.PORT || 4567;
+const app = express();
+
+app.use(function (req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+  res.setHeader('Access-Control-Allow-Credentials', true);
+  next();
+});
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ "extended" : true }));
 
+
 const cards = db.cards;
 const users = db.users;
+
 
 app.get('/', function (req, res) {
   res.send('Hello World!')
@@ -31,7 +41,6 @@ app.post('/api/cards', function (req, res) {
 
 app.post('/api/users', (req,res) => {
   const data = req.body;
-
   return users.create({username: data.username})
     .then(data => {
       res.json(data);
@@ -39,8 +48,17 @@ app.post('/api/users', (req,res) => {
 })
 
 app.get('/api/cards', function (req, res) {
-  const data = req.body;
-  res.json(data);
+  return cards.findAll()
+  .then(cards => {
+    res.json(cards);
+  })
+})
+
+app.get('/api/users', function (req, res) {
+  return users.findAll()
+    .then(users => {
+      res.json(users);
+    })
 })
 
 app.listen(PORT, function () {

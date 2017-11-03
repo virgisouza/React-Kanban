@@ -32,17 +32,17 @@ class NewCardForm extends Component {
   render(){
 
     return (
-      <div>
+      <div className='NewCardForm'>
         <form onSubmit={this.handleSubmit.bind(this)}>
           <input type='text' placeholder='New Task' value={this.state.titleInput} onChange={this.handleChangeTitle.bind(this)}/>
           <select name="priority">
-            <option value="1">Low</option>
-            <option value="2">Medium</option>
-            <option value="3">High</option>
-            <option value="4">Blocker</option>
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+            <option value="Blocker">Blocker</option>
           </select>
           <select name="assignedTo">
-            <option value="1">User One</option>
+            <option value="virgi">User One</option>
           </select>
           <button type='submit'>Submit</button>
         </form>
@@ -53,8 +53,8 @@ class NewCardForm extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addCard: (card) => {
-      dispatch(addCard(card))
+    addCard: (newCard) => {
+      dispatch(addCard(newCard))
     }
   }
 }
