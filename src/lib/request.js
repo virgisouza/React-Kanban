@@ -11,9 +11,10 @@ export const getCards = () => new Promise((resolve, reject) => {
 export const postCard = () => new Promise((resolve, reject) => {
   var oReq = new XMLHttpRequest();
   oReq.addEventListener("onSubmit", function (){
-    console.log('postCard', JSON.parse(this.responseText))
+    let data = JSON.parse(this.responseText);
+    console.log('postCard', data);
     //push into db
-    resolve(JSON.parse(this.responseText))
+    resolve(data);
   });
   oReq.open("POST", "http://localhost:4567/api/cards");
   oReq.send();

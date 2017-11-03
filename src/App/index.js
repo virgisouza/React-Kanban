@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 //import './index.css';
-import { loadCards, addCard, loadPriorities } from '../actions/cards';
+import { loadPriorities } from '../actions/priorities';
+import { loadCards, addCard } from '../actions/cards';
 import NewCardForm from '../containers/NewCardForm/index';
 import CardList from '../containers/CardList';
 import Columns from '../components/Columns';
@@ -22,14 +23,14 @@ class App extends Component {
   componentDidMount(){
     this.props.loadCards();
     this.props.addCard();
-    // this.props.loadPriorities();
+    this.props.loadPriorities();
   }
 
   render() {
     return (
       <div className="App">
         <NewCardForm/>
-        <Columns/>
+
         <CardList cards={this.props.cards}/>
       </div>
     );
@@ -66,3 +67,5 @@ const ConnectedApp = connect(
 
 
 export default ConnectedApp;
+
+
