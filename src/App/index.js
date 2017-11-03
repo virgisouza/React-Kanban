@@ -29,7 +29,7 @@ class App extends Component {
     return (
       <div className="App">
         <NewCardForm/>
-
+        <Columns/>
         <CardList cards={this.props.cards}/>
       </div>
     );

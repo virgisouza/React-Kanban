@@ -9,13 +9,20 @@ module.exports = function (sequelize, DataTypes){
   Card.associate = function (models) {
     Card.belongsTo(models.User, {
       foreignKey:'assigned_to',
-      as: 'Creator',
+      as: 'Assigned To',
       allowNull: false});
     Card.belongsTo(models.User, {
       foreignKey: 'created_by',
-      as: 'Dev',
-      allowNull: false
-    });
+      as: 'Creator',
+      allowNull: false});
+    Card.belongsTo(models.Priority, {
+      foreignKey: 'priorities_id',
+      as: 'Priority Level',
+      allowNull: false});
+    Card.belongsTo(models.Status, {
+      foreignKey: 'status_id',
+      as: 'Status Level',
+      allowNull: false});
   }
 
   return Card;

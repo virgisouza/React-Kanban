@@ -1,6 +1,6 @@
 module.exports = function (sequelize, DataTypes){
 
-  const Status = sequelize.define('Statuses', {type:
+  const Status = sequelize.define('Status', {type:
     {type: DataTypes.STRING, allowNull: false}},
     {tableName: 'statuses'});
 

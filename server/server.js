@@ -18,40 +18,30 @@ app.use(bodyParser.urlencoded({ "extended" : true }));
 
 const Card = db.Card;
 const User = db.User;
-const Priorities = db.priorities;
+const Priority = db.Priority;
 
-
-app.get('/api/cards', (req, res) => {
-  return Card.findAll({
-    include: [
-      {model: User, as: 'Creator'},
-      {model: User, as: 'Dev'}
-    ]
-  }).then(cards => {
-      return res.json(cards);
-  })
-})
-app.get('/api/users', (req, res) => {
-  return User.findAll({
-    include: [
-      {model: Card, as: 'Cards'},
-      {model: Card, as: 'Tasks'}
-    ]
-  }).then(users => {
-      return res.json(users);
-  })
-})
 
 
 app.get('/', function (req, res) {
   res.send('Hello World!')
 })
 
+app.get('/api/cards', (req, res) => {
+  return Card.findAll({
+    include: [
+      {model: User, as: 'Creator'},
+      {model: User, as: 'Assigned To'}
+    ]
+  }).then(cards => {
+      return res.json(cards);
+  })
+})
+
 app.post('/api/cards', function (req, res) {
   const data = req.body;
   console.log('post data 1', data);
 
-  return cards.create({
+  return Card.create({
     title: data.title,
     assigned_to: data.assigned_to,
     priorities_id: data.priorities_id,
@@ -64,6 +54,17 @@ app.post('/api/cards', function (req, res) {
 
 })
 
+app.get('/api/users', (req, res) => {
+  return User.findAll({
+    include: [
+      {model: Card, as: 'Cards'},
+      {model: Card, as: 'Tasks'}
+    ]
+  }).then(users => {
+      return res.json(users);
+  })
+})
+
 app.post('/api/users', (req,res) => {
   const data = req.body;
   return User.create({username: data.username})
@@ -72,28 +73,14 @@ app.post('/api/users', (req,res) => {
     })
 })
 
-// app.get('/api/cards', function (req, res) {
-//   return cards.findAll()
-//   .then(cards => {
-//     res.json(cards);
-//   })
-// })
-
-// app.get('/api/users', function (req, res) {
-//   return users.findAll()
-//     .then(users => {
-//       res.json(users);
-//     })
-// })
-
 app.get('/api/priorities', function (req, res) {
-  return Priorities.findAll()
+  return Priority.findAll()
     .then(priorities => {
       res.json(priorities);
     })
 })
 
 app.listen(PORT, function () {
-  db.sequelize.sync({force: false});
+  db.sequelize.sync({force: true});
   console.log('Swerver up listening on port ' + PORT)
 });

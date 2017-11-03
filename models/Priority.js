@@ -1,6 +1,6 @@
 module.exports = function (sequelize, DataTypes){
 
-  const Priority = sequelize.define('Priorities', {
+  const Priority = sequelize.define('Priority', {
     type: {type: DataTypes.STRING, allowNull: false}},
     {tableName: 'priorities'});
 
