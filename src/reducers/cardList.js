@@ -13,4 +13,6 @@ const cardList = (state = initialState, action) => {
   }
 }
 
+//here is where you can slice data to find, edit and delete specific card
+
 export default cardList;

@@ -3,10 +3,12 @@ import NewCardItem from '../../components/NewCardItem';
 
 const CardList = ({cards}) => {
 
+
   return (
     <div className='CardList'>
       {
-        cards.map((props, idx) => {
+        cards.map((props) => {
+
           return (
 
             <NewCardItem
@@ -15,7 +17,7 @@ const CardList = ({cards}) => {
             priorities_id={props.Priority.type}
             status_id={props.Status.type}
             created_by={props.Creator.username}
-            key={idx}/>
+            key={props.id}/>
             )
         })
       }

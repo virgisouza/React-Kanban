@@ -2,14 +2,13 @@ import React from 'react';
 import UsersItem from '../../components/UsersItem';
 
 
-const UsersList = ({users, onUserChange}) => {
+const AssignedToList = ({users, onAssignedToChange}) => {
 
   return (
-    <div className='UsersList'>
-    <select onChange={onUserChange}>
+    <div className='AssignedToList'>
+    <select onChange={onAssignedToChange}>
       {
         users.map((props, idx) => {
-          //console.log(props.id, 'users props id container');
           return (
 
             <UsersItem
@@ -25,4 +24,4 @@ const UsersList = ({users, onUserChange}) => {
   );
 }
 
-export default UsersList;
+export default AssignedToList;

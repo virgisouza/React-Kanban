@@ -5,19 +5,23 @@ import { addCard } from '../../actions/cards';
 import { loadPriorities } from '../../actions/priorities';
 import PrioritiesList from '../PrioritiesList';
 import UsersList from '../UsersList';
+import AssignedToList from '../AssignedToList';
 
 class NewCardForm extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      titleInput: '',
-      assignedToInput: '',
-      priorityInput: '',
-      statusInput: '',
-      createdByInput: ''
+      title: '',
+      assigned_to: '',
+      priorities_id: '',
+      status_id: 1,
+      created_by: ''
     }
-
+    this.handleChangeCreated = this.handleChangeCreated.bind(this);
+    this.handleChangeAssigned = this.handleChangeAssigned.bind(this);
+    this.handleChangeTitle = this.handleChangeTitle.bind(this);
+    this.handleChangePriority = this.handleChangePriority.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -25,34 +29,47 @@ class NewCardForm extends Component {
     event.preventDefault();
 
     let newCard = {
-      titleInput: this.state.titleInput,
-      createdByInput: this.state.createdByInput,
-      priorityIdInput: this.state.priorityIdInput,
-      statusIdInput: this.state.statusIdInput,
-      userIdInput: this.state.userIdInput
+      title: this.state.title,
+      created_by: this.state.created_by || 1,
+      priorities_id: this.state.priorities_id || 1, //|| //set default , //
+      status_id: this.state.status_id,
+      assigned_to: this.state.assigned_to || 1
     }
+
+    console.log('NEW CARD DATA', newCard)
 
     this.props.addCard(newCard);
 
     this.setState({
-      titleInput: '',
-      assignedToInput: '',
-      priorityInput: '',
-      statusInput: '',
-      createdByInput: ''
+      title: '',
+      assigned_to: '',
+      priorities_id: '',
+      status_id: 1,
+      created_by: ''
     })
   }
 
-
-  handleChange(event){
+  handleChangeTitle(event){
     event.preventDefault();
-    this.setState({
-      titleInput: event.target.value,
-      assignedToInput: event.target.value,
-      priorityInput: event.target.value,
-      statusInput: event.target.value,
-      createdByInput: event.target.value
-    });
+    this.setState({title: event.target.value});
+  }
+
+  handleChangeAssigned(event){
+    event.preventDefault();
+    console.log('handle assigned', event.target.value)
+    this.setState({assigned_to: parseInt(event.target.value)});
+  }
+
+  handleChangePriority(event){
+    event.preventDefault();
+    console.log('handle priority', event.target.value)
+    this.setState({priorities_id: parseInt(event.target.value)});
+  }
+
+  handleChangeCreated(event){
+    event.preventDefault();
+    console.log('handle created', event.target.value)
+      this.setState({created_by: parseInt(event.target.value)});
   }
 
 
@@ -65,10 +82,26 @@ class NewCardForm extends Component {
     return (
       <div className='NewCardForm'>
         <form onSubmit={this.handleSubmit.bind(this)}>
-            <input type='text' placeholder='New Task' value={this.state.titleInput} onChange={this.handleChange.bind(this)}/>
-            <UsersList users={this.props.users} onChange={this.handleChange.bind(this)}/>
-            <PrioritiesList priorities={this.props.priorities} onChange={this.handleChange.bind(this)}/>
-            <UsersList users={this.props.users} onChange={this.handleChange.bind(this)}/>
+            <input
+              type='text'
+              placeholder='New Task'
+              value={this.state.title}
+              onChange={this.handleChangeTitle.bind(this)}
+            />
+
+            <AssignedToList
+              users={this.props.users}
+              onAssignedToChange={this.handleChangeAssigned.bind(this)}
+            />
+
+            <PrioritiesList
+              priorities={this.props.priorities}
+              onPriorityChange={this.handleChangePriority.bind(this)}
+            />
+            <UsersList
+              users={this.props.users}
+              onUserChange={this.handleChangeCreated.bind(this)}
+            />
           <button type='submit'>Submit</button>
         </form>
       </div>
@@ -78,6 +111,7 @@ class NewCardForm extends Component {
 
 const mapStateToProps = (state) => {
   return {
+
     priorities: state.prioritiesList,
     users: state.usersList,
     cards: state.cardList

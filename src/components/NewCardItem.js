@@ -3,7 +3,7 @@ import React from 'react';
 const NewCardItem = ({title, assigned_to, priorities_id, status_id, created_by}) => {
 
   return(
-    <div className="NewCardItem">
+    <div className="new-card">
       <br/>
       <ul>
         <div>Title: {title}</div>

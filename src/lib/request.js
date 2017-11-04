@@ -10,14 +10,17 @@ export const getCards = () => new Promise((resolve, reject) => {
 
 
 export const postCard = (card) => new Promise((resolve, reject) => {
+  let data = JSON.stringify(card);
   var oReq = new XMLHttpRequest();
-  oReq.addEventListener("load", function (){
-    console.log('postCard', JSON.parse(this.responseText));
-    resolve(JSON.parse(this.responseText));
-  });
+  oReq.onreadystatechange = function (){
+    if(oReq.readyState === XMLHttpRequest.DONE && oReq.status === 200) {
+      var response = JSON.parse(this.response);
+      resolve(response);
+    }
+  };
   oReq.open("POST", "http://localhost:4567/api/cards");
   oReq.setRequestHeader('content-type', 'application/json');
-  oReq.send(card);
+  oReq.send(data);
 })
 
 export const getPriorities = () => new Promise((resolve, reject) => {

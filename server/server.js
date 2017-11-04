@@ -49,11 +49,22 @@ app.post('/api/cards', (req, res) => {
     priorities_id: data.priorities_id,
     status_id: data.status_id,
     created_by: data.created_by
-  }).then(data => {
-    console.log('post server data', data);
-    return res.json(data);
   })
-
+  .then(card => {
+   return card.reload({
+      include: [
+      {model: User, as: 'Creator'},
+      {model: User, as: 'Assigned'},
+      {model: Priority, as: 'Priority'},
+      {model: Status, as: 'Status'}
+    ]
+    })
+    res.json(card)
+  })
+  .then(card => {
+    console.log('post server data', card);
+    return res.json(card);
+  })
 })
 
 app.get('/api/users', (req, res) => {
