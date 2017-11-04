@@ -2,6 +2,7 @@ import React , { Component } from 'react';
 import { connect } from 'react-redux';
 import { addCard } from '../../actions/cards';
 import { loadPriorities } from '../../actions/priorities';
+import PrioritiesList from '../PrioritiesList';
 
 class NewCardForm extends Component {
   constructor(props) {
@@ -15,11 +16,21 @@ class NewCardForm extends Component {
       createdByInput: ''
     }
 
-    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit(event){
     event.preventDefault();
+
+    let newCard = {
+      titleInput: this.state.titleInput,
+      createdByInput: this.state.createdByInput,
+      priorityIdInput: this.state.priorityIdInput,
+      statusIdInput: this.state.statusIdInput,
+      userIdInput: this.state.userIdInput
+    }
+
+    this.props.addCard(newCard);
 
     this.setState({
       titleInput: '',
@@ -42,12 +53,9 @@ class NewCardForm extends Component {
     });
   }
 
-  handlePriority(event){
-    event.preventDefault();
-    loadPriorities();
-    this.setState({
-      priorityInput: this.props.priorities.type
-    })
+
+  componentDidMount(){
+
   }
 
   render(){
@@ -57,12 +65,11 @@ class NewCardForm extends Component {
         <form onSubmit={this.handleSubmit.bind(this)}>
           <input type='text' placeholder='New Task' value={this.state.titleInput} onChange={this.handleChange.bind(this)}/>
           <select name="assignedTo">
-            <option value="1">Virgi</option>
+            <option value={this.state.username} onChange={this.handleChange.bind(this)}>bug</option>
           </select>
-          <select name="priority">
-            <option value={this.props.priority_id}>{this.handlePriority.bind(this)}</option>
 
-          </select>
+            <PrioritiesList priorities={this.props.priorities}/>
+
           <select>
             <option value="1">Queue</option>
           </select>
@@ -76,24 +83,29 @@ class NewCardForm extends Component {
   }
 };
 
+const mapStateToProps = (state) => {
+  return {
+    priorities: state.prioritiesList
+  }
+}
+
 const mapDispatchToProps = (dispatch) => {
   return {
     addCard: (newCard) => {
-      console.log('NewCardForm', newCard);
       dispatch(addCard(newCard))
     },
     loadPriorities: (priorities) => {
-      console.log('NewCardForm priorities',   priorities);
       dispatch(loadPriorities(priorities));
     }
   }
 }
 
 const ConnectNewCardForm = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(NewCardForm)
 
 
 export default ConnectNewCardForm;
+
 

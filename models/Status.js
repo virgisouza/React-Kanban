@@ -8,6 +8,7 @@ module.exports = function (sequelize, DataTypes){
     Status.hasMany(models.Card, {
       foreignKey: {
         name: 'status_id',
+        as: 'Status',
         allowNull: true
       }
     })

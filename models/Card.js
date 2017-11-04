@@ -1,7 +1,10 @@
 module.exports = function (sequelize, DataTypes){
 
   const Card = sequelize.define('Card', {
-    title: {type: DataTypes.STRING,allowNull: false}},
+    title: {type: DataTypes.STRING,allowNull: false},
+    created_by: {type: DataTypes.INTEGER},
+    assigned_to: {type: DataTypes.INTEGER}
+  },
     {tableName: 'cards'}
   );
 
@@ -9,7 +12,7 @@ module.exports = function (sequelize, DataTypes){
   Card.associate = function (models) {
     Card.belongsTo(models.User, {
       foreignKey:'assigned_to',
-      as: 'Assigned To',
+      as: 'Assigned',
       allowNull: false});
     Card.belongsTo(models.User, {
       foreignKey: 'created_by',
@@ -17,11 +20,11 @@ module.exports = function (sequelize, DataTypes){
       allowNull: false});
     Card.belongsTo(models.Priority, {
       foreignKey: 'priorities_id',
-      as: 'Priority Level',
+      as: 'Priority',
       allowNull: false});
     Card.belongsTo(models.Status, {
       foreignKey: 'status_id',
-      as: 'Status Level',
+      as: 'Status',
       allowNull: false});
   }
 

@@ -19,10 +19,10 @@ app.use(bodyParser.urlencoded({ "extended" : true }));
 const Card = db.Card;
 const User = db.User;
 const Priority = db.Priority;
+const Status = db.Status;
 
 
-
-app.get('/', function (req, res) {
+app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
@@ -30,14 +30,16 @@ app.get('/api/cards', (req, res) => {
   return Card.findAll({
     include: [
       {model: User, as: 'Creator'},
-      {model: User, as: 'Assigned To'}
+      {model: User, as: 'Assigned'},
+      {model: Priority, as: 'Priority'},
+      {model: Status, as: 'Status'}
     ]
   }).then(cards => {
       return res.json(cards);
   })
 })
 
-app.post('/api/cards', function (req, res) {
+app.post('/api/cards', (req, res) => {
   const data = req.body;
   console.log('post data 1', data);
 
@@ -73,14 +75,15 @@ app.post('/api/users', (req,res) => {
     })
 })
 
-app.get('/api/priorities', function (req, res) {
+app.get('/api/priorities', (req, res) => {
   return Priority.findAll()
     .then(priorities => {
       res.json(priorities);
     })
 })
 
+
 app.listen(PORT, function () {
-  db.sequelize.sync({force: true});
+  db.sequelize.sync({force: false});
   console.log('Swerver up listening on port ' + PORT)
 });
