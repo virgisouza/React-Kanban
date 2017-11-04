@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { loadUsers } from '../actions/users';
 import { loadPriorities } from '../actions/priorities';
 import { loadCards, addCard } from '../actions/cards';
 import NewCardForm from '../containers/NewCardForm/index';
@@ -23,6 +24,7 @@ class App extends Component {
     this.props.loadCards();
     this.props.addCard();
     this.props.loadPriorities();
+    this.props.loadUsers();
   }
 
   render() {
@@ -41,7 +43,8 @@ const mapStateToProps = (state) => {
   return {
     cards: state.cardList,
     card: state.cardList,
-    priorities: state.prioritiesList
+    priorities: state.prioritiesList,
+    users: state.usersList
   }
 }
 
@@ -55,6 +58,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     loadPriorities: () => {
       dispatch(loadPriorities())
+    },
+    loadUsers: () => {
+      dispatch(loadUsers())
     }
   }
 }

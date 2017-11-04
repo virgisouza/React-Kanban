@@ -1,8 +1,10 @@
 import React , { Component } from 'react';
 import { connect } from 'react-redux';
+import { loadUsers } from '../../actions/users';
 import { addCard } from '../../actions/cards';
 import { loadPriorities } from '../../actions/priorities';
 import PrioritiesList from '../PrioritiesList';
+import UsersList from '../UsersList';
 
 class NewCardForm extends Component {
   constructor(props) {
@@ -63,19 +65,10 @@ class NewCardForm extends Component {
     return (
       <div className='NewCardForm'>
         <form onSubmit={this.handleSubmit.bind(this)}>
-          <input type='text' placeholder='New Task' value={this.state.titleInput} onChange={this.handleChange.bind(this)}/>
-          <select name="assignedTo">
-            <option value={this.state.username} onChange={this.handleChange.bind(this)}>bug</option>
-          </select>
-
-            <PrioritiesList priorities={this.props.priorities}/>
-
-          <select>
-            <option value="1">Queue</option>
-          </select>
-          <select name="createdBy">
-            <option value="1">Virgi</option>
-          </select>
+            <input type='text' placeholder='New Task' value={this.state.titleInput} onChange={this.handleChange.bind(this)}/>
+            <UsersList users={this.props.users} onChange={this.handleChange.bind(this)}/>
+            <PrioritiesList priorities={this.props.priorities} onChange={this.handleChange.bind(this)}/>
+            <UsersList users={this.props.users} onChange={this.handleChange.bind(this)}/>
           <button type='submit'>Submit</button>
         </form>
       </div>
@@ -85,7 +78,9 @@ class NewCardForm extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    priorities: state.prioritiesList
+    priorities: state.prioritiesList,
+    users: state.usersList,
+    cards: state.cardList
   }
 }
 
@@ -96,6 +91,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     loadPriorities: (priorities) => {
       dispatch(loadPriorities(priorities));
+    },
+    loadUsers: (users) => {
+      dispatch(loadUsers(users));
     }
   }
 }

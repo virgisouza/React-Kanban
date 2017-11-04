@@ -17,11 +17,11 @@ export const loadCards = () => {
   }
 }
 
-export const addCard =  () => {
+export const addCard =  (newCard) => {
 
   return function (dispatch){
       //POST method
-     return postCard().then(newCard => {
+     return postCard(newCard).then(newCard => {
       console.log(newCard);
       dispatch({
         type:ADD_CARD,
