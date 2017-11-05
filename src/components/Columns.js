@@ -1,14 +1,10 @@
 import React from 'react';
 
-const Columns = () => {
+const Columns = ({type}) => {
 
   return(
-    <div className='columnTitle'>
-      <h3>Queue</h3>
-      <h3>Progress</h3>
-      <h3>Done</h3>
-    </div>
-  )
+      <h3>{type}</h3>
+  );
 }
 
 export default Columns;

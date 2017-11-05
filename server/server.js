@@ -13,7 +13,7 @@ app.use(function (req, res, next) {
 });
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ "extended" : true }));
+// app.use(bodyParser.urlencoded({ "extended" : true }));
 
 
 const Card = db.Card;
@@ -41,7 +41,6 @@ app.get('/api/cards', (req, res) => {
 
 app.post('/api/cards', (req, res) => {
   const data = req.body;
-  console.log('post data 1', data);
 
   return Card.create({
     title: data.title,
@@ -59,10 +58,8 @@ app.post('/api/cards', (req, res) => {
       {model: Status, as: 'Status'}
     ]
     })
-    res.json(card)
   })
   .then(card => {
-    console.log('post server data', card);
     return res.json(card);
   })
 })

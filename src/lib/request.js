@@ -1,8 +1,14 @@
 export const getCards = () => new Promise((resolve, reject) => {
   var oReq = new XMLHttpRequest();
-  oReq.addEventListener("load", function (){
-    resolve(JSON.parse(this.responseText))
-  });
+  oReq.onreadystatechange = function (){
+    if(oReq.readyState === XMLHttpRequest.DONE && oReq.status === 200) {
+      var response = JSON.parse(this.response);
+      resolve(response);
+    }
+  };
+  // oReq.addEventListener("load", function (){
+  //   resolve(JSON.parse(this.responseText))
+  // });
   oReq.open("GET", "http://localhost:4567/api/cards");
   oReq.setRequestHeader('content-type', 'application/json');
   oReq.send();

@@ -6,6 +6,7 @@ import { loadPriorities } from '../../actions/priorities';
 import PrioritiesList from '../PrioritiesList';
 import UsersList from '../UsersList';
 import AssignedToList from '../AssignedToList';
+import Select from '../../components/Select';
 
 class NewCardForm extends Component {
   constructor(props) {
@@ -36,8 +37,6 @@ class NewCardForm extends Component {
       assigned_to: this.state.assigned_to || 1
     }
 
-    console.log('NEW CARD DATA', newCard)
-
     this.props.addCard(newCard);
 
     this.setState({
@@ -56,19 +55,16 @@ class NewCardForm extends Component {
 
   handleChangeAssigned(event){
     event.preventDefault();
-    console.log('handle assigned', event.target.value)
     this.setState({assigned_to: parseInt(event.target.value)});
   }
 
   handleChangePriority(event){
     event.preventDefault();
-    console.log('handle priority', event.target.value)
     this.setState({priorities_id: parseInt(event.target.value)});
   }
 
   handleChangeCreated(event){
     event.preventDefault();
-    console.log('handle created', event.target.value)
       this.setState({created_by: parseInt(event.target.value)});
   }
 
@@ -87,6 +83,13 @@ class NewCardForm extends Component {
               placeholder='New Task'
               value={this.state.title}
               onChange={this.handleChangeTitle.bind(this)}
+            />
+
+            <Select
+              list={this.props.users}
+              label='Users: '
+              type='username'
+              handler={this.handleChangeAssigned.bind(this)}
             />
 
             <AssignedToList

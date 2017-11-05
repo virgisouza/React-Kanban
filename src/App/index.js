@@ -12,7 +12,6 @@ class App extends Component {
   constructor(){
    super();
 
-
   }
 
 
@@ -32,14 +31,13 @@ class App extends Component {
       <div className="App">
         <NewCardForm/>
         <Columns/>
-        <CardList cards={this.props.cards}/>
+        <CardList cards={this.props.cards} columnStatus='Queue'/>
       </div>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  console.log('mapStateToProps',state);
   return {
     cards: state.cardList,
     card: state.cardList,

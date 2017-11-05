@@ -7,13 +7,11 @@ module.exports = function (sequelize, DataTypes){
   User.associate = function (models) {
     User.hasMany(models.Card, {
       foreignKey: 'created_by',
-      as: 'Cards',
-      allowNull: false
+      as: 'Cards'
     });
     User.hasMany(models.Card, {
       foreignKey: 'assigned_to',
-      as: 'Tasks',
-      allowNull: false
+      as: 'Tasks'
     });
   }
 
