@@ -9,7 +9,7 @@ const NewCardItem = ({title, assigned_to, priorities_id, status_id, created_by})
         <div>Priority: {priorities_id}</div>
         <div>Status : {status_id}</div>
         <div>Created By: {created_by} </div>
-        <button>Change Status</button>
+        <button>Edit</button>
       </ul>
   );
 }
