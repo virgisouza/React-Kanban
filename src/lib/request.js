@@ -6,9 +6,6 @@ export const getCards = () => new Promise((resolve, reject) => {
       resolve(response);
     }
   };
-  // oReq.addEventListener("load", function (){
-  //   resolve(JSON.parse(this.responseText))
-  // });
   oReq.open("GET", "http://localhost:4567/api/cards");
   oReq.setRequestHeader('content-type', 'application/json');
   oReq.send();
@@ -49,3 +46,12 @@ export const getUsers = () => new Promise((resolve, reject) => {
   oReq.send();
 })
 
+export const getStatus = () => new Promise((resolve, reject) => {
+  var oReq = new XMLHttpRequest();
+  oReq.addEventListener("load", function (){
+    resolve(JSON.parse(this.response))
+  });
+  oReq.open("GET", "http://localhost:4567/api/statuses");
+  oReq.setRequestHeader('content-type', 'application/json');
+  oReq.send();
+})

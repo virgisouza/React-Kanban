@@ -7,7 +7,7 @@ const Select = ({list, label, type, handler}) => {
       <select onChange={handler}>
         {
           list.map(item => {
-            return <option value={item.id}>{item[type]}</option>
+            return <option value={item.id} key={item.id}>{item[type]}</option>
           })
         }
       </select>

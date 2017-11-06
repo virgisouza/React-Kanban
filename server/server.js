@@ -90,6 +90,13 @@ app.get('/api/priorities', (req, res) => {
     })
 })
 
+app.get('/api/statuses', (req,res) => {
+  return Status.findAll()
+    .then(statuses => {
+      res.json(statuses);
+    })
+})
+
 
 app.listen(PORT, function () {
   db.sequelize.sync({force: false});

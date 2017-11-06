@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import NewCardItem from '../../components/NewCardItem';
+import CardItem from '../../components/CardItem';
 import { connect } from 'react-redux';
 import { loadCards } from '../../actions/cards';
 
@@ -30,7 +30,7 @@ class CardList extends Component {
 
             return (
 
-              <NewCardItem
+              <CardItem
               title={props.title}
               assigned_to={props.Assigned.username}
               priorities_id={props.Priority.type}

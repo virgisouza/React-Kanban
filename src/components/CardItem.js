@@ -1,6 +1,6 @@
 import React from 'react';
 
-const NewCardItem = ({title, assigned_to, priorities_id, status_id, created_by}) => {
+const CardItem = ({title, assigned_to, priorities_id, status_id, created_by}) => {
 
   return(
       <ul className="new-card">
@@ -15,7 +15,7 @@ const NewCardItem = ({title, assigned_to, priorities_id, status_id, created_by})
 }
 
 //rendering filtered card
-export default NewCardItem;
+export default CardItem;
 
 
 

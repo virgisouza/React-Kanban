@@ -1,11 +1,9 @@
 import React , { Component } from 'react';
 import { connect } from 'react-redux';
+import { loadStatus } from '../../actions/status';
 import { loadUsers } from '../../actions/users';
 import { addCard } from '../../actions/cards';
 import { loadPriorities } from '../../actions/priorities';
-import PrioritiesList from '../PrioritiesList';
-import UsersList from '../UsersList';
-import AssignedToList from '../AssignedToList';
 import Select from '../../components/Select';
 
 class NewCardForm extends Component {
@@ -32,7 +30,7 @@ class NewCardForm extends Component {
     let newCard = {
       title: this.state.title,
       created_by: this.state.created_by || 1,
-      priorities_id: this.state.priorities_id || 1, //|| //set default , //
+      priorities_id: this.state.priorities_id || 1,
       status_id: this.state.status_id,
       assigned_to: this.state.assigned_to || 1
     }
@@ -87,23 +85,23 @@ class NewCardForm extends Component {
 
             <Select
               list={this.props.users}
-              label='Users: '
+              label='Assigned To: '
               type='username'
               handler={this.handleChangeAssigned.bind(this)}
             />
 
-            <AssignedToList
-              users={this.props.users}
-              onAssignedToChange={this.handleChangeAssigned.bind(this)}
+            <Select
+              list={this.props.priorities}
+              label='Priority Level: '
+              type='type'
+              handler={this.handleChangePriority.bind(this)}
             />
 
-            <PrioritiesList
-              priorities={this.props.priorities}
-              onPriorityChange={this.handleChangePriority.bind(this)}
-            />
-            <UsersList
-              users={this.props.users}
-              onUserChange={this.handleChangeCreated.bind(this)}
+            <Select
+              list={this.props.users}
+              label='Created By: '
+              type='username'
+              handler={this.handleChangeCreated.bind(this)}
             />
           <button type='submit'>Submit</button>
         </form>
@@ -117,7 +115,8 @@ const mapStateToProps = (state) => {
 
     priorities: state.prioritiesList,
     users: state.usersList,
-    cards: state.cardList
+    cards: state.cardList,
+    statuses: state.statusList
   }
 }
 
@@ -131,6 +130,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     loadUsers: (users) => {
       dispatch(loadUsers(users));
+    },
+    loadStatus: (statuses) => {
+      dispatch(loadStatus(statuses));
     }
   }
 }
