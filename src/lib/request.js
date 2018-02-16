@@ -6,11 +6,10 @@ export const getCards = () => new Promise((resolve, reject) => {
       resolve(response);
     }
   };
-  oReq.open("GET", "http://localhost:4567/api/cards");
+  oReq.open("GET", "/api/cards");
   oReq.setRequestHeader('content-type', 'application/json');
   oReq.send();
 });
-
 
 export const postCard = (card) => new Promise((resolve, reject) => {
   let data = JSON.stringify(card);
@@ -21,7 +20,7 @@ export const postCard = (card) => new Promise((resolve, reject) => {
       resolve(response);
     }
   };
-  oReq.open("POST", "http://localhost:4567/api/cards");
+  oReq.open("POST", "/api/cards");
   oReq.setRequestHeader('content-type', 'application/json');
   oReq.send(data);
 })
@@ -31,7 +30,7 @@ export const getPriorities = () => new Promise((resolve, reject) => {
   oReq.addEventListener("load", function (){
     resolve(JSON.parse(this.responseText))
   });
-  oReq.open("GET", "http://localhost:4567/api/priorities");
+  oReq.open("GET", "/api/priorities");
   oReq.setRequestHeader('content-type', 'application/json');
   oReq.send();
 })
@@ -41,7 +40,7 @@ export const getUsers = () => new Promise((resolve, reject) => {
   oReq.addEventListener("load", function (){
     resolve(JSON.parse(this.responseText))
   });
-  oReq.open("GET", "http://localhost:4567/api/users");
+  oReq.open("GET", "/api/users");
   oReq.setRequestHeader('content-type', 'application/json');
   oReq.send();
 })
@@ -51,7 +50,7 @@ export const getStatus = () => new Promise((resolve, reject) => {
   oReq.addEventListener("load", function (){
     resolve(JSON.parse(this.response))
   });
-  oReq.open("GET", "http://localhost:4567/api/statuses");
+  oReq.open("GET", "/api/statuses");
   oReq.setRequestHeader('content-type', 'application/json');
   oReq.send();
 })

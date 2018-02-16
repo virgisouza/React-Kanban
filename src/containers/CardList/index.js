@@ -9,14 +9,11 @@ class CardList extends Component {
     super(props);
 
     this.state = {
-      filterInput: ''
+      statusInput: ''
     }
   }
 
 
-  setfilter(){
-
-  }
 
   render() {
     return (
@@ -31,12 +28,13 @@ class CardList extends Component {
             return (
 
               <CardItem
-              title={props.title}
-              assigned_to={props.Assigned.username}
-              priorities_id={props.Priority.type}
-              status_id={props.Status.type}
-              created_by={props.Creator.username}
-              key={props.id}/>
+                title={props.title}
+                assigned_to={props.Assigned.username}
+                priorities_id={props.Priority.type}
+                status_id={props.Status.type}
+                created_by={props.Creator.username}
+                key={props.id}
+              />
             )
           })
         }
@@ -58,7 +56,6 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(loadCards())
     }
   }
-
 }
 
 const ConnectCardList = connect(

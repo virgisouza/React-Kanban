@@ -7,4 +7,6 @@ const Columns = ({type}) => {
   );
 }
 
+
+//render card item into column by type [queue, progress, done]
 export default Columns;
