@@ -39,7 +39,7 @@ class ColumnsList extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    status: state.statusList
+    statuses: state.statusList
   }
 }
 
