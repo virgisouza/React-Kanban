@@ -6,7 +6,8 @@ import { loadPriorities } from '../actions/priorities';
 import { loadCards, addCard } from '../actions/cards';
 import NewCardForm from '../containers/NewCardForm/index';
 import CardList from '../containers/CardList';
-import Columns from '../components/Columns';
+//import Columns from '../components/Columns';
+import ColumnsList from '../containers/ColumnsList';
 
 class App extends Component {
   // eslint-disable-next-line
@@ -32,12 +33,13 @@ class App extends Component {
     return (
       <div className="App">
         <NewCardForm/>
-        <Columns/>
-        <CardList cards={this.props.cards} columnStatus='Queue'/>
+        <ColumnsList statusesName= {this.props.statuses}/>
+        <CardList cards={this.props.cards} columnStatus= 'Queue' />
       </div>
     );
   }
 }
+
 
 const mapStateToProps = (state) => {
   return {

@@ -20,6 +20,8 @@ class CardList extends Component {
       <div className='CardList'>
         {
           this.props.cards.filter(card => {
+            console.log(card.Priority.type, "CARDLIST");
+            // console.log(card.Status.type, "column status");
             return card.Status.type === this.props.columnStatus
 
           })

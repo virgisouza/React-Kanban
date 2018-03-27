@@ -12,20 +12,26 @@ body {
 
 .CardList {
   background-color: #d5dce8;
-  padding: 5px;
-}
-
-.CardList ul {
-
+  padding: 2px;
+  width: 25%;
 }
 
 .new-card {
   background-color: #f7f9fc;
-  width: 25%;
+  width: 75%;
   font-size: 1em;
   color: #4a4e54;
 
 }
+
+.Columns-List {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-around;
+}
+
+
+
 
 button {
   background-color: #d5dce8;
